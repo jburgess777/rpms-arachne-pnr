@@ -13,7 +13,7 @@
 
 Name:           arachne-pnr
 Version:        0.1
-Release:        0.4.20170628git%{shortcommit0}%{?dist}
+Release:        0.5.20170628git%{shortcommit0}%{?dist}
 Summary:        Place and route for FPGA compilation
 License:        GPLv2
 URL:            https://github.com/cseed/arachne-pnr
@@ -58,6 +58,9 @@ make install PREFIX="%{_prefix}" \
 %{_datadir}/%{name}
 
 %changelog
+* Thu Jul 12 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.1-0.5.20170628git7e135ed
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
+
 * Wed Feb 07 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.1-0.4.20170628git7e135ed
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
 

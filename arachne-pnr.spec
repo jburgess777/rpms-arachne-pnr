@@ -18,6 +18,7 @@ Summary:        Place and route for FPGA compilation
 License:        GPLv2
 URL:            https://github.com/cseed/arachne-pnr
 Source0:        https://github.com/cseed/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+BuildRequires:  gcc-c++
 BuildRequires:  icestorm
 
 %description

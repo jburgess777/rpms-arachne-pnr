@@ -1,4 +1,4 @@
-%global commit0 7e135edb31feacde85ec5b7e5c03fc9157080977
+%global commit0 840bdfdeb38809f9f6af4d89dd7b22959b176fdd
 
 # The upstream makefile gets version information by invoking git. We can't
 # do that. We can still use what the Makefile calls GIT_REV, because that's
@@ -6,20 +6,21 @@
 # hard-code VER and VER_HASH here, as ver0 and verhash0.  When updating this
 # package spec for a new git snapshot, clone the git repo, run make in it,
 # and inspect the generated version_(has).cc to determine the correct values.
-%global ver0 0.1+203+0
-%global verhash0 59750
+%global ver0 0.1+323+0
+%global verhash0 01387
 
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:           arachne-pnr
 Version:        0.1
-Release:        0.5.20170628git%{shortcommit0}%{?dist}
+Release:        0.6.20181028git%{shortcommit0}%{?dist}
 Summary:        Place and route for FPGA compilation
 License:        GPLv2
-URL:            https://github.com/cseed/arachne-pnr
-Source0:        https://github.com/cseed/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+URL:            https://github.com/YosysHQ/arachne-pnr
+Source0:        https://github.com/YosysHQ/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 BuildRequires:  gcc-c++
 BuildRequires:  icestorm
+Patch1:         use-std-priority-queue.patch
 
 %description
 Arachne-pnr implements the place and route step of the hardware
@@ -35,6 +36,7 @@ Verilog-to-bistream tool chain for iCE40 1K and 8K FPGA development.
 
 %prep
 %setup -q -n %{name}-%{commit0}
+%patch1 -p1 -b .std
 
 # can't use git from Makefile to extract version information
 sed -i 's/^VER =.*/VER = %{ver0}/' Makefile
@@ -59,6 +61,10 @@ make install PREFIX="%{_prefix}" \
 %{_datadir}/%{name}
 
 %changelog
+* Sun Oct 28 2018 Jon Burgess <jburgess777@gmail.com> - 0.1-0.6.20181028git840bdfd
+- Update to latest git
+- Use std::priority_queue to fix assert in custom implementation
+
 * Thu Jul 12 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.1-0.5.20170628git7e135ed
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
 
